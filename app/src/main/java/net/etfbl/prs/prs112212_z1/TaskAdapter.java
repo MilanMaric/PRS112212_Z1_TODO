@@ -40,7 +40,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class is used to control {@link android.widget.ListView} items, that are {@link Task}s actually.
  *
+ * @see Task
+ * @see android.widget.ListView
  */
 public class TaskAdapter extends BaseAdapter {
     private static String TAG = "TaskAdapter";

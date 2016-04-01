@@ -74,8 +74,8 @@ public class TaskActivity extends AppCompatActivity {
         mButtonOK = (Button) findViewById(R.id.ok);
         mTextViewName = (TextView) findViewById(R.id.name);
         if (mTask != null) {
-
-            mTextViewName.setText(mTask.getTitle());
+            if (mTextViewName != null)
+                mTextViewName.setText(mTask.getTitle());
             mButtonDelete = (Button) findViewById(R.id.delete);
             mButtonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
