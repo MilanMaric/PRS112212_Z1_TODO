@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TODO</string>
+    <string name="add_new">ADD NEW</string>
+    <string name="add_new_caption">Text for new note:</string>
+    <string name="ok">OK</string>
+    <string name="delete">Delete this note</string>
+    <string name="empty_title">You can not write an empty note!</string>
+    <string name="confirm_delete_title">Delete this task?</string>
+    <string name="confirm_delete_text">Are you sure to delete this task?</string>
+    <string name="confirm_delete">Delete</string>
+    <string name="confirm_delete_cancel">Cancel</string>
+    <string name="add_caption">Insert text about this task.</string>
+</resources>
