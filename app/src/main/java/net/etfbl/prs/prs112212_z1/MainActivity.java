@@ -1,3 +1,23 @@
+/****************************************************************************
+ * Copyright (c) 2016 Elektrotehnicki fakultet
+ * Patre 5, Banja Luka
+ * <p/>
+ * All Rights Reserved
+ * <p/>
+ * \file TaskActivity.java
+ * \brief
+ * This file contains a source code for main activity - activity that would be launced when application starts
+ * <p/>
+ * Created on 31.03.2016
+ *
+ * @Author Milan Maric
+ * <p/>
+ * \notes
+ * <p/>
+ * <p/>
+ * \history
+ * <p/>
+ **********************************************************************/
 package net.etfbl.prs.prs112212_z1;
 
 import android.content.Intent;

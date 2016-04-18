@@ -106,7 +106,9 @@ public class TaskActivity extends AppCompatActivity {
         mButtonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextViewName.getText().toString().isEmpty()) {
+                String text=mTextViewName.getText().toString();
+                text=TaskAdapter.trimEndOfString(text);
+                if (text==null || text.isEmpty()) {
                     Toast.makeText(getBaseContext(), R.string.empty_title, Toast.LENGTH_SHORT).show();
                 } else {
                     if (mTask == null) {

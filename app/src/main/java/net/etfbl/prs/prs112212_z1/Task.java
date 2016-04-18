@@ -6,7 +6,7 @@
  * <p/>
  * \file TaskActivity.java
  * \brief
- * This file contains a source code for class TaskActivity
+ * This file contains a source code of bean class Task
  * <p/>
  * Created on 31.03.2016
  *

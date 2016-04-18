@@ -124,6 +124,7 @@ public class TaskAdapter extends BaseAdapter {
      * @see TaskAdapter#saveItems()
      */
     public void addTask(Task task) {
+        task.setTitle(trimEndOfString(task.getTitle()));
         mList.add(task);
         notifyDataSetChanged();
         saveItems();
@@ -161,6 +162,7 @@ public class TaskAdapter extends BaseAdapter {
         if (position < mList.size()) {
             Task old = (Task) getItem(position);
             old.setStatus(task.getStatus());
+            task.setTitle(trimEndOfString(task.getTitle()));
             old.setTitle(task.getTitle());
             notifyDataSetChanged();
             saveItems();
@@ -256,6 +258,11 @@ public class TaskAdapter extends BaseAdapter {
             mList = new ArrayList<Task>();
         }
         notifyDataSetChanged();
+    }
+
+
+    public static String trimEndOfString(String string){
+        return string.replaceAll("\\s+$","");
     }
 
 }
