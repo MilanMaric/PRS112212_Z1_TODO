@@ -1,23 +1,22 @@
 /****************************************************************************
  * Copyright (c) 2016 Elektrotehnicki fakultet
  * Patre 5, Banja Luka
- * <p>
+ * <p/>
  * All Rights Reserved
- * <p>
+ * <p/>
  * \file TaskActivity.java
  * \brief
  * This file contains a source code for class TaskActivity
- * <p>
+ * <p/>
  * Created on 31.03.2016
  *
  * @Author Milan Maric
- * <p>
+ * <p/>
  * \notes
- * <p>
- * <p>
+ * <p/>
+ * <p/>
  * \history
- * <p>
- *
+ * <p/>
  **********************************************************************/
 
 package net.etfbl.prs.prs112212_z1;
@@ -25,7 +24,8 @@ package net.etfbl.prs.prs112212_z1;
 import java.io.Serializable;
 
 /**
- * This is JavaBean class, actually model class of To Do task
+ * This class represents model of task.
+ *
  */
 public class Task implements Serializable {
     /**

@@ -1,26 +1,27 @@
 /****************************************************************************
  * Copyright (c) 2016 Elektrotehnicki fakultet
  * Patre 5, Banja Luka
- * <p>
+ * <p/>
  * All Rights Reserved
- * <p>
+ * <p/>
  * \file TaskActivity.java
  * \brief
  * This file contains a source code for class TaskAdapter
- * <p>
+ * <p/>
  * Created on 31.03.2016
  *
  * @Author Milan Maric
- * <p>
+ * <p/>
  * \notes
- * <p>
- * <p>
+ * <p/>
+ * <p/>
  * \history
- * <p>
+ * <p/>
  **********************************************************************/
 package net.etfbl.prs.prs112212_z1;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,8 @@ public class TaskAdapter extends BaseAdapter {
     private static String TAG = "TaskAdapter";
     private Context mContext;
     private List<Task> mList;
-
+    private Drawable drawableInProgress;
+    private Drawable drawableDone;
     /**
      * Constructor that makes empty instance of {@link TaskAdapter}.
      *
@@ -58,6 +60,8 @@ public class TaskAdapter extends BaseAdapter {
     public TaskAdapter(Context mContext) {
         this.mContext = mContext;
         this.mList = new ArrayList<>();
+        drawableDone=mContext.getResources().getDrawable(R.drawable.ico_done);
+        drawableInProgress=mContext.getResources().getDrawable(R.drawable.ico_in_progress);
     }
 
     /**
@@ -69,6 +73,8 @@ public class TaskAdapter extends BaseAdapter {
     public TaskAdapter(Context mContext, List<Task> mList) {
         this.mContext = mContext;
         this.mList = mList;
+        drawableDone=mContext.getResources().getDrawable(R.drawable.ico_done);
+        drawableInProgress=mContext.getResources().getDrawable(R.drawable.ico_in_progress);
     }
 
     @Override
@@ -92,6 +98,7 @@ public class TaskAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.d(TAG, "getView(" + position + ")");
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -100,9 +107,9 @@ public class TaskAdapter extends BaseAdapter {
         Task task = (Task) getItem(position);
         ImageView image = (ImageView) view.findViewById(R.id.image);
         if (task.getStatus() == Task.STATUS_IN_PROGRES) {
-            image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ico_in_progress));
+            image.setImageDrawable(drawableInProgress);
         } else {
-            image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ico_done));
+            image.setImageDrawable(drawableDone);
         }
         TextView title = (TextView) view.findViewById(R.id.title);
         title.setText(task.getTitle());
