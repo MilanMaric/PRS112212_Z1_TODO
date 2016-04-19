@@ -36,9 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private static int mREQUEST_ADD = 987;
     private static int mREQUEST_EDIT = 988;
     private static String TAG = "MainActivity";
+    private static String LIST_ITEMS = "list_items";
     private TaskAdapter mAdapter = null;
-    private ListView mListView;
-    private Button mButtonNew;
     private int mClickedPosition;
 
     @Override
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
         if (savedInstanceState != null) {
-            List<Task> values = (List<Task>) savedInstanceState.getSerializable("list_items");
+            List<Task> values = (List<Task>) savedInstanceState.getSerializable(LIST_ITEMS);
             if (values != null) {
                 mAdapter = new TaskAdapter(this, values);
             } else {
@@ -58,36 +57,33 @@ public class MainActivity extends AppCompatActivity {
             mAdapter.loadItems();
         }
         setContentView(R.layout.activity_main);
-        mListView = (ListView) findViewById(R.id.list_view);
-        mListView.setAdapter(mAdapter);
-        mButtonNew = (Button) findViewById(R.id.add_new);
-        mButtonNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), TaskActivity.class);
-                startActivityForResult(intent, mREQUEST_ADD);
-            }
-        });
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "Status changed at position: " + position);
-                mAdapter.changeStatus(position);
-            }
-        });
-        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                mClickedPosition = position;
-                Intent intent = new Intent(getBaseContext(), TaskActivity.class);
-                Task clickedTask = (Task) mAdapter.getItem(position);
-                intent.putExtra("task", clickedTask);
-                startActivityForResult(intent, mREQUEST_EDIT, null);
-                return true;
-            }
-        });
+        ListView mListView = (ListView) findViewById(R.id.list_view);
+        if (mListView != null) {
+            mListView.setAdapter(mAdapter);
+        }
+        Button mButtonNew = (Button) findViewById(R.id.add_new);
+        if (mButtonNew != null) {
+            mButtonNew.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getBaseContext(), TaskActivity.class);
+                    startActivityForResult(intent, mREQUEST_ADD);
+                }
+            });
+        }
+        if (mListView != null) {
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.d(TAG, "Status changed at position: " + position);
+                    mAdapter.changeStatus(position);
+                }
+            });
+        }
+        if (mListView != null) {
+            mListView.setOnItemLongClickListener(new TaskListViewLongClickListener());
+        }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -102,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     mAdapter.updateTask(mClickedPosition, task);
                 }
             } else {
-                if (data.hasExtra("DELETE") && "DELETE".equals(data.getStringExtra("DELETE"))) {
+                if (data.hasExtra(TaskActivity.DELETE_TAG) && TaskActivity.DELETE_TAG.equals(data.getStringExtra(TaskActivity.DELETE_TAG))) {
                     Log.d(TAG, "Delete task on position: " + mClickedPosition);
                     mAdapter.deleteTask(mClickedPosition);
                 }
@@ -112,13 +108,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "onSaveInstanceState");
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(LIST_ITEMS, (Serializable) mAdapter.getItems());
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable("list_items", (Serializable) mAdapter.getItems());
+    /**
+     * Class that is used to make item long click listener for Task list view.
+     */
+    private class TaskListViewLongClickListener implements AdapterView.OnItemLongClickListener {
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            mClickedPosition = position;
+            Intent intent = new Intent(getBaseContext(), TaskActivity.class);
+            Task clickedTask = (Task) mAdapter.getItem(position);
+            intent.putExtra("task", clickedTask);
+            startActivityForResult(intent, mREQUEST_EDIT, null);
+            return true;
+        }
     }
 }
