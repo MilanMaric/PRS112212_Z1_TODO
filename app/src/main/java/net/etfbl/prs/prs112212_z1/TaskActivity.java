@@ -44,14 +44,6 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
      */
     private Task mTask = null;
     /**
-     * Confirm button
-     */
-    private Button mButtonOK;
-    /**
-     * Delete button (only if this {@link Activity} is using to change task)
-     */
-    private Button mButtonDelete;
-    /**
      * TextView that is used
      */
     private TextView mTextViewName;
@@ -75,7 +67,7 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             setContentView(R.layout.activity_new_task);
         }
-        mButtonOK = (Button) findViewById(R.id.ok);
+        Button mButtonOK = (Button) findViewById(R.id.ok);
         if (mButtonOK != null) {
             mButtonOK.setOnClickListener(this);
         }
@@ -83,7 +75,7 @@ public class TaskActivity extends AppCompatActivity implements View.OnClickListe
         if (mTask != null) {
             if (mTextViewName != null)
                 mTextViewName.setText(mTask.getTitle());
-            mButtonDelete = (Button) findViewById(R.id.delete);
+            Button mButtonDelete = (Button) findViewById(R.id.delete);
             if (mButtonDelete != null) {
                 mButtonDelete.setOnClickListener(this);
             }

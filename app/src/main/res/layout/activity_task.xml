@@ -14,7 +14,7 @@
         android:id="@+id/caption_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_caption" />
+        android:text="@string/edit_caption" />
 
     <EditText
         android:id="@+id/name"

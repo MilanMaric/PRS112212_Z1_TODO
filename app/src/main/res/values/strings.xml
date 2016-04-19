@@ -2,6 +2,7 @@
     <string name="app_name">TODO</string>
     <string name="add_new">ADD NEW</string>
     <string name="add_new_caption">Text for new note:</string>
+    <string name="edit_caption">New text for the note:</string>
     <string name="ok">OK</string>
     <string name="delete">Delete this note</string>
     <string name="empty_title">You can not write an empty note!</string>
